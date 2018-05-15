@@ -1,0 +1,144 @@
+<html>
+	<head>
+		<title>Atributos html</title>
+		<link rel="stylesheet" href="General.css" type="text/css">
+		<link href="http://nefmaker.com/csspracticas/practicados/datos.css" rel="stylesheet"  type="text/css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+	</head>
+	<body>
+		<div class="contenidor">
+		<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				 <span data-twitter >@yacaFx</span> 
+				 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			</p>
+			<p>
+				Duis aute irure dolor in reprehenderit in voluptate velit esse
+	            <abbr title=" Strategic Hazard Intervention, Espionage and Logistics Directorate">	
+	            	S.H.I.E.L.D
+	            </abbr>
+	            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
+	            <a href="http://www.yahoo.com">officia</a> deserunt mollit anim id est laborum.
+			</p>
+			<form >
+				<input type="text" placeholder="Nombre..."></input>
+				<input type="text" placeholder="Correo..." disabled></input>
+				<br>
+				<input type="button" value="Enviar"></input>
+				</form>
+			</form>
+		</div>
+		<div>
+			Para más información consulta 
+			<a href="http://www.google.com">Google.com </a>
+		</div>
+		<div>
+			<p>
+				Código html
+			</p>
+			<pre class="pre">
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;Atributos html&lt;/title&gt;
+		&lt;link rel="stylesheet" href="General.css" type="text/css"&gt;
+		&lt;link href="http://nefmaker.com/csspracticas/practicados/datos.css" rel="stylesheet"  type="text/css" /&gt;
+		&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt; 
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;div class="contenidor"&gt;
+		&lt;p&gt;
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				 &lt;span data-twitter &gt;@yacaFx&lt;/span&gt; 
+				 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			&lt;/p&gt;
+			&lt;p&gt;
+				Duis aute irure dolor in reprehenderit in voluptate velit esse
+	            &lt;abbr title=" Strategic Hazard Intervention, Espionage and Logistics Directorate"&gt;	
+	            	S.H.I.E.L.D
+	            &lt;/abbr&gt;
+	            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui 
+	            &lt;a href="http://www.yahoo.com"&gt;officia&lt;/a&gt; deserunt mollit anim id est laborum.
+			&lt;/p&gt;
+			&lt;form &gt;
+				&lt;input type="text" placeholder="Nombre..."&gt;&lt;/input&gt;
+				&lt;input type="text" placeholder="Correo..." disabled&gt;&lt;/input&gt;
+				&lt;br&gt;
+				&lt;input type="button" value="Enviar"&gt;&lt;/input&gt;
+				&lt;/form&gt;
+			&lt;/form&gt;
+		&lt;/div&gt;
+		&lt;div&gt;
+			Para más información consulta 
+			&lt;a href="http://www.google.com"&gt;Google.com &lt;/a&gt;
+		&lt;/div&gt;
+		
+	&lt;/body&gt;
+&lt;/html&gt;		
+			</pre>
+			<p>
+				Código css
+			</p>
+			<pre class="pre">
+/*
+	Incluimos liberia para el tipografia
+*/
+@font-face{
+	font-family: "Ralaway";
+	src: url('Raleway-SemiBold.ttf');
+	font-weight: 400;
+	font-style: normal;
+
+}
+*{
+	font-family: Relaway;
+}
+
+.contenidor{
+	border: 1px solid #219652;
+	margin: 10px auto;
+	width: 300px;
+	height: 400px;
+	padding: 5px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/*
+	Con estas sentencias podemos modificar las
+	propiedades de los elementos html
+*/
+
+abbr[title]{
+	border-bottom: 1px dotted #ccc;
+	color: red;
+	cursor: help;
+}
+span[data-twitter]{
+	color: blue;
+}
+
+input[type="text"]{
+	width: 200px;
+	margin: 5px 0;
+}
+
+input[type="button"]{
+	margin: 10px 0;
+}
+
+input[type="text"][disabled]{
+	border: 5px dotted Lightgreen;
+	background-color: #ccc;
+}
+
+
+/*a[href*=http]{ que contenga
+a[href$='.com']{ que termine con*/
+a[href^=http]{
+	padding-left: 20px;
+	background: url(link.png) left no-repeat;
+}
+			</pre>
+		</div>
+	</body>
+</html>

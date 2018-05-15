@@ -1,0 +1,38 @@
+.contenedor{
+	
+	display: flex;
+	flex-direction: row;	
+	flex-wrap: wrap;
+	
+	justify-content:center;
+	align-items: center;
+	width: 400px;
+	height: 400px;
+	background-color: blue;
+	padding: 10px;
+
+
+}
+.subcontenido{
+
+	
+	width: 40px;
+	height: 40px;
+	background-color:red;
+	margin: 10px;
+	text-align: center;
+	
+	border-radius: 10px;
+	box-shadow: 5px 5px;
+	text-shadow: 10px 5px 3px blue;
+}
+
+.pre {
+  background-color:black;
+  border:1px solid #00000;
+  padding:10px;
+  overflow:auto;
+  margin:7px;
+  color:#0150c7;
+  
+}

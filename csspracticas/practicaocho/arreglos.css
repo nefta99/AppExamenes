@@ -1,0 +1,42 @@
+@font-face{
+	font-family: "Relaway";
+	src: url("Raleway-SemiBold.ttf");
+	font-weight: 400;
+	font-style: normal;
+}
+
+/*
+	Aplicamos el cambio de fuete a todos los elementos
+*/
+*{
+	font-family: Relaway;
+}
+.containare{
+	
+	border: 1px solid #219652;
+	margin: 10px;
+	width: 300px;
+	padding: 5px;
+	list-style: none;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	
+}
+
+span{
+	font-weight: bold;
+	font-size: 20px;
+	text-shadow: 2px 2px rgba(0, 0, 0, 0.4);
+}
+/*
+	cuando usamos el selector + con esto nos funciona para 
+	que podamos soleccionar al selector cercano a h1.
+	Cuando usamos ~  le decimos la navegador que use todos 
+	los elementos que estan en el mismo nivel del selector h1
+*/
+h1  ~ p{
+	background-color: #f5ffb3;
+	padding: 10px;
+	border-radius: 5px;
+	border:  1px solid #ccc;
+}

@@ -1,0 +1,108 @@
+
+<html>
+	<head>
+		<title> 
+		Flexbox otorgar comportamiento a los item de diseño
+		</title>
+		<link href="datos.css" rel="stylesheet"  type="text/css" />
+		
+
+		<link href="http://nefmaker.com/csspracticas/practicados/datos.css" rel="stylesheet"  type="text/css" />
+	</head>
+	<body>
+		<div class="contenedor">
+			<div class="item ">
+				item1
+			</div>
+			<div class="item item2">
+				item2
+			</div>
+			<div class="item item3">
+				item3
+			</div>
+		</div>
+		<div>
+			<p>Codigo html para mostrar  Flexbox otorgar comportamiento a los item de diseño</p>
+			<pre class="pre">
+				&lthtml&gt
+	&lthead&gt
+		&lttitle&gt 
+		Flexbox otorgar comportamiento a los item de diseño
+		&lt/title&gt
+		&ltlink href="datos.css" rel="stylesheet"  type="text/css" /&gt
+		
+
+		&ltlink href="../csspracticas/practicados/datos.css" rel="stylesheet"  type="text/css" /&gt
+	&lt/head&gt
+	&ltbody&gt
+		&ltdiv class="contenedor"&gt
+			&ltdiv class="item "&gt
+				item1
+			&lt/div&gt
+			&ltdiv class="item item2"&gt
+				item2
+			&lt/div&gt
+			&ltdiv class="item item3"&gt
+				item3
+			&lt/div&gt
+		&lt/div&gt
+		
+	&lt/body&gt
+&lt/html&gt
+
+			</pre>
+			<p>
+				Como esta el css
+			</p>
+			<pre class="pre">
+				.contenedor{
+	/*Contenido del display*/
+	display: flex;
+	
+
+	/*Esta line es remplaza  a 
+		flex-direccion:row;
+		flex-wrap:wrap;
+	*/
+
+	flex-flow: row wrap;
+
+	justify-content: center;
+
+	border-radius: 15px;
+	background-color: LightGreen;
+	padding:10px;
+	width:300px;
+	height: 150px;
+}
+
+.item{
+	flex-grow:1; /* Con esta propiedad cada elemento
+	que viva en esta contenedor se puede hacer mas grande 
+	o más chico, puede tener el valor de  CERO A UNO
+	*/
+	padding-top: 20px;
+	width:80px;
+	height:40px;
+	background-color:DarkOrange;
+	margin-left: 2px;
+	order:3;
+}
+
+.item2{
+	/*Con esta propiedad baja el item*/
+	align-self: flex-end;
+
+	/* 
+		se puede modificar el orden con el que aparecesar
+		en la pantalla
+	*/
+	order:1;
+}
+.item3{
+	order:2;
+}
+			</pre>
+		</div>
+	</body>
+</html>

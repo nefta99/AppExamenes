@@ -1,0 +1,95 @@
+<html>
+	<head>
+		<title>	After & before 	</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+		<link rel="stylesheet" type="text/css" href="datito.css">
+		<link href="http://nefmaker.com/csspracticas/practicados/datos.css" rel="stylesheet"  type="text/css" />
+	</head>
+	<body>
+		<div class="contieneme"> 
+			<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.nefsito
+			</p>
+		</div>
+		Más información en <a data-nombre="buscador" href="http://www.google.com"> Google</a>
+
+		<div>
+		<p>
+			Código html
+		</p>
+		<pre class="pre">
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;	After &amp; before 	&lt;/title&gt;
+		&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;/&gt; 
+		&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;datito.css&quot;&gt;		
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;div class=&quot;contieneme&quot;&gt; 
+			&lt;p&gt; Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.nefsito
+			&lt;/p&gt;
+		&lt;/div&gt;
+		Más información en &lt;a data-nombre=&quot;buscador&quot; href=&quot;http://www.google.com&quot;&gt; Google&lt;/a&gt;
+
+		&lt;div&gt;
+		&lt;p class=&quot;pre&quot;&gt;
+			
+		&lt;/p&gt;
+		&lt;/div&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+		</pre>
+		<p>
+			Código css
+		</p>
+		<pre class="pre">
+.contieneme{
+	border:1px solid #1270A1;
+	background-color:#A3D180; 
+	padding: 10px;
+	border-radius: 10px;
+	margin: 10px;
+}
+
+/*
+	seudo selector
+	:: para utilizar el before;
+*/
+.contieneme::before{
+
+	/*
+		Para que funcione este ejemplo 
+		siempre debe de llevar content 
+		siempre es forsoso.
+	*/
+	content:"Contenido antes del div";
+}
+.contieneme::after{
+
+	/*
+		Para que funcione este ejemplo 
+		siempre debe de llevar content 
+		siempre es forsoso.
+	*/
+	
+	content:"Contenido despues del div";
+}
+
+a::before{
+	/*
+		Para que funcione este ejemplo 
+		siempre debe de llevar content 
+		siempre es forsoso aun que este vacio.
+	*/	
+	/*
+		Sacamos provecho del microdato.
+	*/
+	
+	content: "el " attr(data-nombre) " ";
+	padding-left: 20px;
+	background:url(link.png) left  center no-repeat;
+
+}
+		</pre>
+		</div>
+	</body>
+</html>

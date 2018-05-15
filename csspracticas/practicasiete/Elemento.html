@@ -1,0 +1,115 @@
+<html>
+	<head>
+		<title>
+		Hijos selectores
+		</title>
+				<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+
+				<link href="http://nefmaker.com/csspracticas/practicados/datos.css" rel="stylesheet"  type="text/css" />
+		<link href="datoes.css" type="text/css" rel="stylesheet">		
+	</head>
+	<body>
+		<h1>Tarea del día</h1>
+		<ul id="to_dos">
+			<li>
+				Pendientes
+				<ul>
+					<li>Pasear al perro</li>
+					<li>Comprar comida</li>
+					<li>Planear vacaciones</li>
+					<li>Ir al gym</li>
+				</ul>
+			</li>
+			<li>
+				Completados
+				<ul>
+					<li>Agendar juntas</li>
+					<li>Reservar boletos</li>
+					<li>Enviar flores</li>	
+				</ul>
+			</li>
+		</ul>
+
+		<div>
+			<p>Código html, trabajo con lu li</p>
+			<pre class="pre">
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;
+		Hijos selectores
+		&lt;/title&gt;
+				&lt;link href="http://nefmaker.com/csspracticas/practicados/datos.css" rel="stylesheet"  type="text/css" /&gt;
+		&lt;link href="datoes.css" type="text/css" rel="stylesheet"&gt;		
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;h1&gt;Tarea del día&lt;/h1&gt;
+		&lt;ul id="to_dos"&gt;
+			&lt;li&gt;
+				Pendientes
+				&lt;ul&gt;
+					&lt;li&gt;Pasear al perro&lt;/li&gt;
+					&lt;li&gt;Comprar comida&lt;/li&gt;
+					&lt;li&gt;Planear vacaciones&lt;/li&gt;
+					&lt;li&gt;Ir al gym&lt;/li&gt;
+				&lt;/ul&gt;
+			&lt;/li&gt;
+			&lt;li&gt;
+				Completados
+				&lt;ul&gt;
+					&lt;li&gt;Agendar juntas&lt;/li&gt;
+					&lt;li&gt;Reservar boletos&lt;/li&gt;
+					&lt;li&gt;Enviar flores&lt;/li&gt;	
+				&lt;/ul&gt;
+			&lt;/li&gt;
+		&lt;/ul&gt;
+		
+	&lt;/body&gt;
+&lt;/html&gt;
+			</pre>
+			<p>Código css que se maneja en esta pagina</p>
+			<pre class="pre">
+/*
+	Cion este código implementamos la familia en general
+*/			
+*{
+	font-family: Relaway;
+}
+li {
+	border: 1px solid #216952;
+	margin: 10px;
+	width: 300px;
+	padding: 5px;
+	list-style: none;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0, 0, 0,0.19);
+}
+/*Código para incluir el tipo de fuente que se incluye*/
+@font-face{
+	font-family: "Relaway";
+	src: url("Raleway-SemiBold.ttf");
+	font-weight: 400;
+	font-style: normal;
+}
+
+#to_dos > li{
+	border:  1px solid #219652;
+	margin: 10px;
+	width: 300px;
+	padding: 5px;
+	list-style: none;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+/*
+	con este código movemos los menus al solo para por 
+	de estos elementos 
+*/
+#to_dos > li li:hover{
+	background-color: #D4D4D4;
+	padding: 3px;
+	border-radius: 3px;
+}
+			</pre>
+		</div>
+	</body>
+</html>

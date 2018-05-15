@@ -1,0 +1,47 @@
+.contieneme{
+	border:1px solid #1270A1;
+	background-color:#A3D180; 
+	padding: 10px;
+	border-radius: 10px;
+	margin: 10px;
+}
+
+/*
+	seudo selector
+	:: para utilizar el before;
+*/
+.contieneme::before{
+
+	/*
+		Para que funcione este ejemplo 
+		siempre debe de llevar content 
+		siempre es forsoso.
+	*/
+	content:"Contenido antes del div";
+}
+.contieneme::after{
+
+	/*
+		Para que funcione este ejemplo 
+		siempre debe de llevar content 
+		siempre es forsoso.
+	*/
+	
+	content:"Contenido despues del div";
+}
+
+a::before{
+	/*
+		Para que funcione este ejemplo 
+		siempre debe de llevar content 
+		siempre es forsoso aun que este vacio.
+	*/	
+	/*
+		Sacamos provecho del microdato.
+	*/
+	
+	content: "el " attr(data-nombre) " ";
+	padding-left: 20px;
+	background:url(link.png) left  center no-repeat;
+
+}

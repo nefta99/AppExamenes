@@ -1,0 +1,121 @@
+<html>
+	<head>
+		<title> At-Rules
+		</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+		<link rel="stylesheet" href="Customisado.css">
+
+		<link href="http://nefmaker.com/csspracticas/practicados/datos.css" rel="stylesheet"  type="text/css" />
+	</head>
+	<body>
+
+		<div class="contenedor" >
+		<h1> El Titulo</h1>
+		
+		"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+		"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
+		</div>
+		<div>
+			<p>Código html para mostrar At-rules, con este ejemplo podemos mostrar incluir reglas para incluir fuentes e incluir formas de impresiones con las reglas @font @media </p>
+			<pre class="pre">
+				&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt; At-Rules
+		&lt;/title&gt;
+		&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;/&gt; 
+		&lt;link rel=&quot;stylesheet&quot; href=&quot;Customisado.css&quot;&gt;
+
+		
+	&lt;/head&gt;
+	&lt;body&gt;
+
+		&lt;div class=&quot;contenedor&quot; &gt;
+		&lt;h1&gt; El Titulo&lt;/h1&gt;
+		
+		&quot;Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?&quot;
+		&quot;Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?&quot;
+		&lt;/div&gt;
+		
+
+	&lt;/body&gt;
+&lt;/html&gt;
+			</pre>
+			<p>
+				Como esta el Css
+			</p>
+			<pre class="pre">
+				/*importamos otro css hay forma de hacer desde css*/
+/*Utilizamos la regla del arroba para incluir esta informacion*/
+@import url(Generales.css);
+
+
+.contenedor{
+	/*Caja contenedora*/
+	background-color: Lightgreen;
+	aling-items:center;
+	border-radius: 15px;
+	border:8px solid #ccc;
+	padding: 40px;
+	margin: 100px auto;
+	width:300px;
+	height: 100%;
+	font-weight: bold;
+	font-size:14px;
+}
+
+/*Con esta regla podemos hacer que nuestro titulo se convierta en
+  letras mayusculas
+*/
+h1{
+	/*
+		una vez ya que agregamos nuestro 
+		codigo css para la tipografica
+		lo podemos usar en esta parte 
+		para el titulo
+	*/
+	font-family: Relaway;
+	text-transform: uppercase;
+}
+
+/*
+Pidemos difinir el tipo de letra para nuestro sitio
+para esto necestamos un metodo llamado @font-fece
+*/
+
+@font-face{
+	font-family: "Raleway";
+	src:local(Relaway-SimiBold.ttf);
+	font-weight: 400;
+	font-style: normal;
+}
+
+/*
+	otra funcionalidad que podemos encontrar es 
+	para imprimir, esto lo maneja css como nevedades
+	para esto vamos a implementar el siguiente codigo
+*/
+@media print{
+	body{
+		font-size: 10pt;
+		font-family: times, serif;
+	}
+	.contenedor{
+		-webkit-column-count: 2;
+		border:none;
+	}
+}
+			</pre>
+			<p>
+				Css que tiene generales
+			</p>
+			<pre class="pre">
+				body{
+					background-color: #364F59;
+					margin: 0;
+					padding: 0;
+				}
+			</pre>
+		</div>
+
+	</body>
+</html>
