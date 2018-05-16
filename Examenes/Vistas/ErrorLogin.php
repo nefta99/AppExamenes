@@ -7,11 +7,11 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Inicio</title>
+        <title>Error en el login</title>
     </head>
     <body>
-        <?php
-        // put your code here
-        ?>
+        <div>
+            <p>Error en el login</p>
+        </div>
     </body>
 </html>
