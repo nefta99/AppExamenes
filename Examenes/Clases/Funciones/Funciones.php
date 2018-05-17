@@ -164,15 +164,51 @@ class Funciones {
             $resultado->close();
         }   
         $mysqli->close();
-        //$sjons = json_encode($pantallas);
+
         return $sjons;
     }
 /*********************************************************************************************************************************************************************************************************************************/               
     function validarUsuario($usuario,$pass){
+        $sjons="";
+        try {
+            require_once '../ConServidor.php';
+            $base = new ConServidor();        
+            $datos = array();        
+            $sql = "CALL sp_ValidaUsario(\'$usuario\',\'$pass\');";
+            $sql = str_replace("\'","'",$sql);
+            $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+            /* comprobar la conexión */
+            if ($mysqli->connect_errno) {
+                printf("Falló la conexión: %s\n", $mysqli->connect_error);
+                exit();
+                        /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+            }
+            if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+                $i=1;
+            
+                $sjons="";
+                while($obj = $resultado->fetch_object()){                   
+                    $sjons.="".$obj->Resultado."";                              
+                    $i++;                    
+                }
+                $sjons .=""; 
+           
+                $resultado->close();
+            }   
+            $mysqli->close();        
+        } catch (Exception $e) {
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+        }
+        
+        return $sjons;
+    }
+/*******************************************************************************************************************************************************************************************************************************************/
+    function tipoUsuario($usuario){
+         $sjons="";
         require_once '../ConServidor.php';
         $base = new ConServidor();        
         $datos = array();        
-        $sql = "CALL sp_ValidaUsario(\'$usuario\',\'$pass\');";
+        $sql = "CALL sp_tipoUsuario(\'$usuario\');";
         $sql = str_replace("\'","'",$sql);
         $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
         /* comprobar la conexión */
@@ -184,16 +220,23 @@ class Funciones {
         if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
             $i=1;
             
-            
-            while($obj = $resultado->fetch_object()){                                                 
-                 $sjons.=$obj->Resultado;
+            while($obj = $resultado->fetch_object()){                  
+                 //$pantallas[]= array('Mensaje'=>$obj->Mensaje);
+                
+                 
+                     $sjons.= $obj->TipoUsuario;
+                 
+                 
+                 
+                 
                   $i++;                    
-            }
-            
+            }           
+          
             $resultado->close();
         }   
         $mysqli->close();
-        //$sjons = json_encode($pantallas);
+  
         return $sjons;
+    
     }
 }
