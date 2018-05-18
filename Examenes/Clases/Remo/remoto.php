@@ -50,13 +50,23 @@ switch ($opcion)
         $resul = $funciones->tipoUsuario($usuario);
         $res = $funciones->tomarSubdominio();
         $urls="http://".$_SERVER['HTTP_HOST'].$res."Vistas/";        
-        //$valores = array('TipoUsuario' =>$resul , 'url' => $urls );        
-        $valores = array('TipoUsuario' =>$resul );        
+        $valores = array('TipoUsuario' =>$resul , 'url' => $urls );        
+        //$valores = array('TipoUsuario' =>$resul );        
         
         echo json_encode($valores);
    
         break;
-    
+ /****************************************************************************************************************/
+    case "guarMaterias":
+        $materia = $_POST['mat'];
+        $usuario = $_POST['usuario'];
+        
+        require_once'../Funciones/Funciones.php';
+        $funciones = new Funciones();
+        $resul = $funciones->guardarMaterias($materia,$usuario);    
+        $valores = array('salida' =>$resul  );    
+        echo json_encode($valores);
+        break;
  /************************************************************************************************************************************************************/   
     case "Inicio":
             require_once '../Funciones/Funciones.php';  

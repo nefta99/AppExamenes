@@ -11,7 +11,7 @@ and open the template in the editor.
     <meta charset="UTF-8">
     <title>Examenes</title>
     <link href="../Front/css/Menus.css" rel="stylesheet" type="text/css"/> 
-    <script src="../../Boostrap/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link href="../../Boostrap/css/Boostrapt.css" rel="stylesheet" type="text/css"/>
     
 </head>
 
@@ -23,9 +23,13 @@ and open the template in the editor.
             <li><a href="#" id="ACerrar">Cerrar</a></li>
         </ul>
     </nav>
+<!--    aquí va la zona de trabajo-->
     <div >
         <img src="../Front/img/examen.jpg">
     </div>
 </body>
+<script src="../../Boostrap/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="../../Boostrap/js/bootstrap.min.js" type="text/javascript"></script>
+
 <script src="../Front/js/Menu.js" type="text/javascript"></script>
 </html>

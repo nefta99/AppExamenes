@@ -17,25 +17,22 @@
 class Funciones {
 /********************************************************************************************************************/
      private $json;
-      public function Tomainformacion(){
-          $jsons= "[";
-          $jsons .='{"Fruta": "Manzana" },';
-          $jsons .='{"Fruta": "Platano" },';
-          $jsons .='{"Fruta": "Mango" }';
-          $jsons.="]";
-          
-          $this->json= $jsons;
-                  
-           return $this->json;
 
-       }
+     
 /********************************************************************************************************************/       
        
        public function tomarSubdominio(){
-          $jsons= "/AppExamenes/Examenes/";
-          //$jsons= "/Examenes/";
-          
-          
+           
+         require_once '../Ambientes.php';
+         $ambiente = new Ambientes();             
+         if ($ambiente->getAmbiente()=="DEVL")
+         {
+             $jsons= "/AppExamenes/Examenes/";
+         }
+        if ($ambiente->getAmbiente()=="PROD")
+        {
+            $jsons= "/Examenes/";
+        } 
           $this->json= $jsons;
                   
            return $this->json;
@@ -239,4 +236,42 @@ class Funciones {
         return $sjons;
     
     }
+/******************************************************************************************************************************************************/
+    function guardarMaterias($materia,$usuario){
+        $sjons="";
+        require_once '../ConServidor.php';
+        $base = new ConServidor();        
+        $datos = array();        
+        $sql = "CALL sp_GuardarMaterias(\'$materia\',\'$usuario\');";
+        $sql = str_replace("\'","'",$sql);
+        $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+        /* comprobar la conexión */
+        if ($mysqli->connect_errno) {
+            printf("Falló la conexión: %s\n", $mysqli->connect_error);
+            exit();
+                        /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+        }
+        if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+            $i=1;
+            
+            while($obj = $resultado->fetch_object()){                  
+                 //$pantallas[]= array('Mensaje'=>$obj->Mensaje);
+                
+                 
+                     $sjons.= $obj->Salida;
+                 
+                 
+                 
+                 
+                  $i++;                    
+            }           
+          
+            $resultado->close();
+        }   
+        $mysqli->close();
+  
+        return $sjons;
+    
+    }
+    /**************************************************************************************************************************************************************/
 }
