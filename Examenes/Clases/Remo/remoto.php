@@ -96,7 +96,33 @@ switch ($opcion)
         $res =$funciones->llenargridAgregar();
         echo $res; 
         break;
-}
+/******************************************************************************************************************/
+    case "cargarMaterias":
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->cargaMaterias();
+        echo json_encode($res);
+        break;
 /***********************************************************************************************************************/
+    case "editarMateria":
+        $id=$_POST['id'];
+        $materia=$_POST['materia'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->editarmaterias($id,$materia);  
+        echo json_encode($res);
+        break;
+/*********************************************************************************************************************************/
+    case "eliminarMateria":
+        $id=$_POST['id'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->eliminarMaterias($id);
+         echo json_encode($res);
+        break;
+}
+
+
+    
 ?>
 

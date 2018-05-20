@@ -21,28 +21,23 @@ class Funciones {
      
 /********************************************************************************************************************/       
        
-       public function tomarSubdominio(){
-           
+       public function tomarSubdominio(){           
          require_once '../Ambientes.php';
          $ambiente = new Ambientes();             
          if ($ambiente->getAmbiente()=="DEVL")
          {
              $jsons= "/AppExamenes/Examenes/";
          }
-        if ($ambiente->getAmbiente()=="PROD")
-        {
+         if ($ambiente->getAmbiente()=="PROD")
+         {
             $jsons= "/Examenes/";
-        } 
-          $this->json= $jsons;
-                  
-           return $this->json;
-
+         } 
+         $this->json= $jsons;                  
+         return $this->json;
        }
        
 /**********************************************************************************************************************/       
-       
-       
-       public function InformacionGeneral(){
+    public function InformacionGeneral(){
         require_once '../ConServidor.php';
         $base = new ConServidor();        
         $datos = array();
@@ -51,33 +46,21 @@ class Funciones {
         /* comprobar la conexión */
         if ($mysqli->connect_errno) {
             printf("Falló la conexión: %s\n", $mysqli->connect_error);
-            exit();
-                        /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+            exit();/* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
         }
         if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
             $i=0;
             $sjons="[";
-            while($obj = $resultado->fetch_object()){
-                  //$datos[$i] =array('Pantalla'=>$obj->Pantalla,'Link'=>$obj->Link,'Icono'=>$obj->icono) ;
-//                  $id=$obj->Id;
-//                  $Titulo = $obj->Titulo;
-//                  $DescripcionHtml = $obj->DescripcionHtml;
-//                  $html = str_replace("\"","¬",$obj->Html);
-//                  $link = $obj->Link;
-//                  $css = $obj->Css;                  
-//                  $sjons .='{\"Id\":\"".$id."\",\"Titulo\":\"".$Titulo."\",\"DescripcionHtml\":\"".$DescripcionHtml."\",\"Link\":\"".$link."\",\"Css\":\"".$css."\"}';
-//                  
+            while($obj = $resultado->fetch_object()){            
                  $pantallas[]= array('Id'=>$obj->Id,'Titulo'=>$obj->Titulo,'Link'=>$obj->Link);
-                  $i++;
-                    
-            } 
-                                        
+                  $i++;                   
+            }                                         
             $resultado->close();
         }   
         $mysqli->close();
         $sjons = json_encode($pantallas);
         return $sjons;
-       }
+    }
 /***********************************************************************************************************************************/               
        
        public function Tomarpaginas(){
@@ -93,7 +76,6 @@ class Funciones {
            /*Realizamos un bucle para ir obteniendo los resultados*/
            while ($x=$bd->obtener_fila($stmt,0)){
                $this-> permiso = $x[0];
-
                     $i++;
            }
            return $this->json;
@@ -110,8 +92,7 @@ class Funciones {
         /* comprobar la conexión */
         if ($mysqli->connect_errno) {
             printf("Falló la conexión: %s\n", $mysqli->connect_error);
-            exit();
-                        /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+            exit();    /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
         }
         if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
             $i=0;
@@ -137,24 +118,19 @@ class Funciones {
         /* comprobar la conexión */
         if ($mysqli->connect_errno) {
             printf("Falló la conexión: %s\n", $mysqli->connect_error);
-            exit();
-                        /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+            exit();  /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
         }
         if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
             $i=1;
             $sjons="[";
             while($obj = $resultado->fetch_object()){                  
-                 //$pantallas[]= array('Mensaje'=>$obj->Mensaje);
-                
+                 //$pantallas[]= array('Mensaje'=>$obj->Mensaje);                
                  if($i==$obj->Contador){
                      $sjons.="[\"".$obj->Id."\", \"".$obj->Body."\",\"".$obj->LleyendaHtml."\",\"".$obj->Leyendacss."\",\"".$obj->CssMostrar."\",\"".$obj->Ubicacion."\",\"".$obj->Link."\",\"".$obj->Titulo."\"]";
                  }
                  else{
                      $sjons.="[\"".$obj->Id."\",\"".$obj->Body."\",\"".$obj->LleyendaHtml."\",\"".$obj->Leyendacss."\",\"".$obj->CssMostrar."\",\"".$obj->Ubicacion."\",\"".$obj->Link."\",\"".$obj->Titulo."\"],";
-                 }
-                 
-                 
-                 
+                 }                 
                   $i++;                    
             }
             $sjons .="]"; 
@@ -177,19 +153,16 @@ class Funciones {
             /* comprobar la conexión */
             if ($mysqli->connect_errno) {
                 printf("Falló la conexión: %s\n", $mysqli->connect_error);
-                exit();
-                        /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+                exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
             }
             if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
-                $i=1;
-            
+                $i=1;            
                 $sjons="";
                 while($obj = $resultado->fetch_object()){                   
                     $sjons.="".$obj->Resultado."";                              
                     $i++;                    
                 }
-                $sjons .=""; 
-           
+                $sjons .="";            
                 $resultado->close();
             }   
             $mysqli->close();        
@@ -211,30 +184,18 @@ class Funciones {
         /* comprobar la conexión */
         if ($mysqli->connect_errno) {
             printf("Falló la conexión: %s\n", $mysqli->connect_error);
-            exit();
-                        /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+            exit();                        /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
         }
         if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
-            $i=1;
-            
-            while($obj = $resultado->fetch_object()){                  
-                 //$pantallas[]= array('Mensaje'=>$obj->Mensaje);
-                
-                 
-                     $sjons.= $obj->TipoUsuario;
-                 
-                 
-                 
-                 
+            $i=1;            
+            while($obj = $resultado->fetch_object()){                                                  
+                     $sjons.= $obj->TipoUsuario;                 
                   $i++;                    
-            }           
-          
+            } 
             $resultado->close();
         }   
-        $mysqli->close();
-  
-        return $sjons;
-    
+        $mysqli->close();  
+        return $sjons;    
     }
 /******************************************************************************************************************************************************/
     function guardarMaterias($materia,$usuario){
@@ -248,30 +209,100 @@ class Funciones {
         /* comprobar la conexión */
         if ($mysqli->connect_errno) {
             printf("Falló la conexión: %s\n", $mysqli->connect_error);
-            exit();
-                        /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+            exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
         }
         if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
-            $i=1;
-            
+            $i=1;            
             while($obj = $resultado->fetch_object()){                  
-                 //$pantallas[]= array('Mensaje'=>$obj->Mensaje);
-                
-                 
-                     $sjons.= $obj->Salida;
-                 
-                 
-                 
-                 
+                 //$pantallas[]= array('Mensaje'=>$obj->Mensaje);                
+                     $sjons.= $obj->Salida;                
                   $i++;                    
-            }           
-          
+            }                     
             $resultado->close();
         }   
-        $mysqli->close();
-  
-        return $sjons;
-    
+        $mysqli->close();  
+        return $sjons;    
     }
-    /**************************************************************************************************************************************************************/
+/**************************************************************************************************************************************************************/
+    function cargaMaterias()
+    {
+         $sjons="";
+         $pantalla;
+        require_once '../ConServidor.php';
+        $base = new ConServidor();        
+        $datos = array();        
+        $sql = "CALL sp_mostrarMaterias();";
+        $sql = str_replace("\'","'",$sql);
+        $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+        /* comprobar la conexión */
+        if ($mysqli->connect_errno) {
+            printf("Falló la conexión: %s\n", $mysqli->connect_error);
+            exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+        }
+        if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+            $i=1;           
+            while($obj = $resultado->fetch_object()){                  
+                 //$pantallas[]= array('IdMateria'=>$obj->IdMateria, 'Nombre'=>$obj->Nombre,'FechaCreacion'=>$obj->FechaCreacion,'CreadoPor'=>$obj->CreadoPor);
+                 $pantallas[]= array($obj->IdMateria,$obj->Nombre,$obj->FechaCreacion,$obj->CreadoPor);                   
+                  $i++;                    
+            }             
+            $resultado->close();
+        }   
+        $mysqli->close();  
+        return $pantallas;
+    }
+/************************************************************************************************************************************************************************************************/
+    function editarmaterias($id,$materia){
+        $sjons="";
+         $pantalla;
+        require_once '../ConServidor.php';
+        $base = new ConServidor();        
+        $datos = array();        
+        $sql = "CALL sp_editarMateria($id,\'$materia');";
+        $sql = str_replace("\'","'",$sql);
+        $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+        /* comprobar la conexión */
+        if ($mysqli->connect_errno) {
+            printf("Falló la conexión: %s\n", $mysqli->connect_error);
+            exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+        }
+        if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+            $i=1;           
+            while($obj = $resultado->fetch_object()){                  
+                 //$pantallas[]= array('IdMateria'=>$obj->IdMateria, 'Nombre'=>$obj->Nombre,'FechaCreacion'=>$obj->FechaCreacion,'CreadoPor'=>$obj->CreadoPor);
+                 $sjons= array('Resultado'=>$obj->Resultado);                   
+                  $i++;                    
+            }             
+            $resultado->close();
+        }   
+        $mysqli->close();  
+        return $sjons;
+    }
+ /******************************************************************************************************************************************************************/
+    function eliminarMaterias($id){
+        $sjons="";
+        $pantalla;
+        require_once '../ConServidor.php';
+        $base = new ConServidor();        
+        $datos = array();        
+        $sql = "CALL sp_eliminarMaterias($id);";
+        $sql = str_replace("\'","'",$sql);
+        $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+        /* comprobar la conexión */
+        if ($mysqli->connect_errno) {
+            printf("Falló la conexión: %s\n", $mysqli->connect_error);
+            exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+        }
+        if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+            $i=1;           
+            while($obj = $resultado->fetch_object()){                  
+                 //$pantallas[]= array('IdMateria'=>$obj->IdMateria, 'Nombre'=>$obj->Nombre,'FechaCreacion'=>$obj->FechaCreacion,'CreadoPor'=>$obj->CreadoPor);
+                 $sjons= array('Resultado'=>$obj->Resultado);                   
+                  $i++;                    
+            }             
+            $resultado->close();
+        }   
+        $mysqli->close();  
+        return $sjons;
+    }
 }
