@@ -305,4 +305,141 @@ class Funciones {
         $mysqli->close();  
         return $sjons;
     }
+/******************************************************************************************************************************************************************************/
+    function catalogomaterias()    {
+        $sjons="";
+        $pantalla;
+        require_once '../ConServidor.php';
+        $base = new ConServidor();        
+        $datos = array();        
+        $sql = "CALL sp_mostrarMaterias();";
+        $sql = str_replace("\'","'",$sql);
+        $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+        /* comprobar la conexión */
+        if ($mysqli->connect_errno) {
+            printf("Falló la conexión: %s\n", $mysqli->connect_error);
+            exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+        }
+        if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+            $i=1;           
+            while($obj = $resultado->fetch_object()){                  
+                $pantallas[]= array('IdMateria'=>$obj->IdMateria, 'Materia'=>$obj->Nombre);
+                //$pantallas[]= array($obj->IdMateria,$obj->Nombre,$obj->FechaCreacion,$obj->CreadoPor);                   
+                $i++;                    
+            }             
+            $resultado->close();
+        }   
+        $mysqli->close();  
+        return $pantallas;
+    }
+/****************************************************************************************************************************************************************************************/
+    function guardacapitulos($idmateria,$capitulo,$usuario){
+        $sjons="";
+        $pantalla;
+        require_once '../ConServidor.php';
+        $base = new ConServidor();        
+        $datos = array();        
+        $sql = "CALL sp_guardarCapitulos(\'$idmateria\',\'$capitulo\',\'$usuario\');";
+        $sql = str_replace("\'","'",$sql);
+        $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+        /* comprobar la conexión */
+        if ($mysqli->connect_errno) {
+            printf("Falló la conexión: %s\n", $mysqli->connect_error);
+            exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+        }
+        if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+            $i=1;           
+            while($obj = $resultado->fetch_object()){                  
+                $pantallas[]= array('Resultado'=>$obj->Salida);
+                //$pantallas[]= array($obj->IdMateria,$obj->Nombre,$obj->FechaCreacion,$obj->CreadoPor);                   
+                $i++;                    
+            }             
+            $resultado->close();
+        }   
+        $mysqli->close();  
+        return $pantallas;
+    }
+/*******************************************************************************************************************************************/
+    function cargarCapitulos()    {
+        $sjons="";
+        $pantalla;
+        require_once '../ConServidor.php';
+        $base = new ConServidor();        
+        $datos = array();        
+        $sql = "CALL sp_cargarCapitulos();";
+        $sql = str_replace("\'","'",$sql);
+        $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+        /* comprobar la conexión */
+        if ($mysqli->connect_errno) {
+            printf("Falló la conexión: %s\n", $mysqli->connect_error);
+            exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+        }
+        if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+            $i=1;           
+            while($obj = $resultado->fetch_object()){                  
+                //$pantallas[]= array('Resultado'=>$obj->Salida);
+                $pantallas[]= array($obj->IdCapitulo,$obj->Capitulo,$obj->Materia,$obj->CreadoPor,$obj->FechaCreacion);                   
+                $i++;                    
+            }             
+            $resultado->close();
+        }   
+        $mysqli->close();  
+        return $pantallas;
+    }
+/***************************************************************************************************************************************/
+    function editarCapitulos($idmateria,$capitulo,$idcapitulo)
+    {
+        $sjons="";
+        $pantalla;
+        require_once '../ConServidor.php';
+        $base = new ConServidor();        
+        $datos = array();        
+        $sql = "CALL sp_editarCapitulo(\'$idmateria\',\'$idcapitulo\',\'$capitulo\');";
+        $sql = str_replace("\'","'",$sql);
+        $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+        /* comprobar la conexión */
+        if ($mysqli->connect_errno) {
+            printf("Falló la conexión: %s\n", $mysqli->connect_error);
+            exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+        }
+        if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+            $i=1;           
+            while($obj = $resultado->fetch_object()){                  
+                $pantallas[]= array('Resultado'=>$obj->Resultado);
+               // $pantallas[]= array($obj->IdCapitulo,$obj->Capitulo,$obj->Materia,$obj->CreadoPor,$obj->FechaCreacion);                   
+                $i++;                    
+            }             
+            $resultado->close();
+        }   
+        $mysqli->close();  
+        return $pantallas;   
+    }
+ /*****************************************************************************************************************************************************/
+    function eliminacapitulo($idcapitulo){
+           $sjons="";
+        $pantalla;
+        require_once '../ConServidor.php';
+        $base = new ConServidor();        
+        $datos = array();        
+        $sql = "CALL sp_borrarCapitulo($idcapitulo);";
+        $sql = str_replace("\'","'",$sql);
+        $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+        /* comprobar la conexión */
+        if ($mysqli->connect_errno) {
+            printf("Falló la conexión: %s\n", $mysqli->connect_error);
+            exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+        }
+        if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+            $i=1;           
+            while($obj = $resultado->fetch_object()){                  
+                $pantallas[]= array('Resultado'=>$obj->Resultado);
+               // $pantallas[]= array($obj->IdCapitulo,$obj->Capitulo,$obj->Materia,$obj->CreadoPor,$obj->FechaCreacion);                   
+                $i++;                    
+            }             
+            $resultado->close();
+        }   
+        $mysqli->close();  
+        return $pantallas; 
+    }
+/**********************************************************************************************************************************************************************/
 }

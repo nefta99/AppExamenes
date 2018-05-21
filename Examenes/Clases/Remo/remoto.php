@@ -120,7 +120,51 @@ switch ($opcion)
         $res = $funciones->eliminarMaterias($id);
          echo json_encode($res);
         break;
+/************************************************************************************************************************************************/
+    case "cargarMateriasCatalogo":
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->catalogomaterias();
+        echo json_encode($res);
+        break;
+/*************************************************************************************************************************************************************/
+    case "guardarcapitulos":
+        $idmateria= $_POST['idmateria'];
+        $capitulo= $_POST['capitulo'];
+        $usuario= $_POST['usuario'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->guardacapitulos($idmateria,$capitulo,$usuario);
+        echo json_encode($res);
+        break;
+/*********************************************************************************************************************************************************/
+    case "cargarCapitulos":
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->cargarCapitulos();
+        echo json_encode($res);
+        break;
+/********************************************************************************************************************************************************************/
+    case "editarCapitulos":
+        $idmateria= $_POST['idmateria'];
+        $capitulo= $_POST['capitulo'];
+        $idcapitulo= $_POST['idcapitulo'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->editarCapitulos($idmateria,$capitulo,$idcapitulo);
+        echo json_encode($res);
+        break;
+/*************************************************************************************************************************************************************/
+    case "borrarCapitulo":
+         $idcapitulo= $_POST['idcapitulo'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->eliminacapitulo($idcapitulo);
+        echo json_encode($res);
+        break;
+/****************************************************************************************************************************************************************************/
 }
+
 
 
     

@@ -51,8 +51,8 @@ function llenarMenu(){
                 html+='<li><a href="'+data.url +'Preguntas.php" >Preguntas</a></li>';
                 html+='<li><a href="'+data.url+'Examenes.php" >Examenes</a></li>';
                 html+='<li><a href="'+data.url+'Resultados.php">Resultados</a></li>';
-                html+='<li><a href="'+data.url+'Alumnos.php" >Alumnos</a></li>';
-                html+='<li><a href="'+data.url+'Administrador.php" >Administrador</a></li>';
+                html+='<li><a href="'+data.url+'Usuarios.php" >Usuarios</a></li>';
+                
                 
                 
             }
@@ -60,8 +60,8 @@ function llenarMenu(){
             {
                 //usuario con perfil de alumno
                 
-                html+='<li><a href="'+data.url+'Examenes" >Examenes.php</a></li>';
-                html+='<li><a href="'+data.url+'Resultados">Resultados.php</a></li>';
+                html+='<li><a href="'+data.url+'Examenes.php" >Examenes</a></li>';
+                html+='<li><a href="'+data.url+'Resultados.php">Resultados</a></li>';
                 
                 
             }
