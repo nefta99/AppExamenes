@@ -13,7 +13,8 @@ and open the template in the editor.
     <body>
         <div>
             <form action="../Clases/Remo/remoto.php" method="post"  >
-                <div class="row">
+                <div class="container">
+                    <div class="row">
                     <div class="col-md-1">
                         <label>Usuario</label>
                     </div>
@@ -30,11 +31,13 @@ and open the template in the editor.
                     </div>
                 </div>
                 <div class="row">
+                    
                     <div class="col-md-1">
                         <input type="submit" name="btnsubmit" value="Login" class="btn btn-success">
                     </div>
                     
                 </div>
+                </div>             
                 
                 
                 

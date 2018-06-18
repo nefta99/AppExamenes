@@ -153,7 +153,7 @@ function cargartablaCapitulos()
                                 "render": function(datas, type, full, meta) {
                                     var buttonID = "rollover_" + full.id;
                                     var editID="edit_"+full.id;                                    
-                                    return "<a id=" + buttonID + " class='btn btn-primary rolloverBtn' role='button'    onclick='eliminar(" + ds[meta.row][0] + ","+meta.row+");' ><img src='../Front/img/EliminarR.png' width='30px' height='30px'   /></a>&nbsp; <a id=" + editID + " class='btn btn-primary rolloverBtn' role='button'    onclick='cargarEditada(" + ds[meta.row][0] + ","+meta.row+",\""+ds[meta.row][2]+"\",\""+ds[meta.row][1]+"\");' ><img src='../Front/img/update.png' width='30px' height='30px'   /></a>";
+                                    return "<a id=" + buttonID + " class='btn btn-primary rolloverBtn' role='button'    onclick='eliminar(" + ds[meta.row][0] + ","+meta.row+");' ><img src='../Front/img/eliminar.svg' width='30px' height='30px'   /></a>&nbsp; <a id=" + editID + " class='btn btn-primary rolloverBtn' role='button'    onclick='cargarEditada(" + ds[meta.row][0] + ","+meta.row+",\""+ds[meta.row][2]+"\",\""+ds[meta.row][1]+"\");' ><img src='../Front/img/editar.svg' width='30px' height='30px'   /></a>";
                                 }
                          }
                      ]

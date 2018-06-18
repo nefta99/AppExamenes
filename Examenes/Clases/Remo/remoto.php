@@ -162,7 +162,117 @@ switch ($opcion)
         $res = $funciones->eliminacapitulo($idcapitulo);
         echo json_encode($res);
         break;
+/*******************************************************************************************************************************/
+    case "cargarCapitulosCatalogoSinM":
+        $materia= $_POST['materias'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->catalogocapitulosSinMateria($materia);
+        echo json_encode($res);
+        break;
+    /****************************************************************************************************************************************************************************/
+    case "cargarCapitulosCatalogo":
+        $idmateria= $_POST['idmateria'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->catalogocapitulos($idmateria);
+        echo json_encode($res);
+        break;
+/******************************************************************************************************************************************************************************************/
+    case "catalogoComponentes":
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->catalogocomponentes();
+        echo json_encode($res);
+        break;
 /****************************************************************************************************************************************************************************/
+    case "preguntaGuardar":
+        $idmateria= $_POST['idmateria'];
+        $idcapitulo= $_POST['idcapitulo'];
+        $pregunta= $_POST['pregunta'];
+        $idcomponente= $_POST['idcomponente'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->guardarPregunta($idmateria,$idcapitulo,$pregunta,$idcomponente);
+        echo json_encode($res);        
+        break;
+/****************************************************************************************************************************************************************************************/
+    case "guardarvalores":
+        $r1= $_POST['r1'];
+        $r2= $_POST['r2'];
+        $r3= $_POST['r3'];
+        $r4= $_POST['r4'];
+        $r5= $_POST['r5'];
+        $v1= $_POST['v1'];
+        $v2= $_POST['v2'];
+        $v3= $_POST['v3'];
+        $v4= $_POST['v4'];
+        $v5= $_POST['v5'];
+        $idpregunta = $_POST['idpregunta'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->guardavaloresrespuesta($r1,$r2,$r3,$r4,$r5,$v1,$v2,$v3,$v4,$v5,$idpregunta);        
+        echo json_encode($res);        
+        
+        break;
+    
+    
+/*************************************************************************************************************/
+    case "cargaPreguntas":
+        
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->buscarPreguntas();        
+        echo json_encode($res); 
+        break;
+/******************************************************************************************************************************/
+    case "editarPreguntas":
+        $idpregunta = $_POST['idpregunta'];
+        $idMateria = $_POST['idMateria'];
+        $idCapitulo = $_POST['idCapitulo'];
+        $pregunta = $_POST['pregunta'];
+        $idComponente = $_POST['idComponente'];
+        
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->editaPreguntas($idpregunta, $idMateria,$idCapitulo,$pregunta, $idComponente );        
+        echo json_encode($res); 
+        break;
+/*********************************************************************************************************************/
+    case "buscarRespuestas":
+        $Idpregunta = $_POST['Idpregunta'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->buscarRespuestasValores($Idpregunta );        
+        echo json_encode($res); 
+        break;
+/***************************************************************************************************************************/
+    case "editarRespuestasValores":
+        $r1 = $_POST['r1'];
+        $r2 = $_POST['r2'];
+        $r3 = $_POST['r3'];
+        $r4 = $_POST['r4'];
+        $r5 = $_POST['r5'];
+        
+        $v1 = $_POST['v1'];
+        $v2 = $_POST['v2'];
+        $v3 = $_POST['v3'];
+        $v4 = $_POST['v4'];
+        $v5 = $_POST['v5'];
+        
+        $id1 = $_POST['id1'];
+        $id2 = $_POST['id2'];
+        $id3 = $_POST['id3'];
+        $id4 = $_POST['id4'];
+        $id5 = $_POST['id5'];
+        $idpreg = $_POST['idpregunta'];
+        
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->editarRespuestasGuar($r1,$r2,$r3,$r4,$r5,$v1,$v2,$v3,$v4,$v5,$id1,$id2,$id3,$id4,$id5,$idpreg);
+        echo json_encode($res); 
+        break;
+/************************************************************************************************************/
 }
 
 

@@ -11,17 +11,10 @@ and open the template in the editor.
     <meta charset="UTF-8">
     <title>Examenes</title>
     <link href="../Front/css/Menus.css" rel="stylesheet" type="text/css"/> 
+    <link href="../../datatable/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
     <link href="../../Boostrap/css/Boostrapt.css" rel="stylesheet" type="text/css"/>
-    <style>
-        .tamanioDibujo{
-            max-width: 50%;
-            display:block;
-            margin-left:auto;
-            margin-right:auto;
-            margin-top: auto;
-            margin-bottom: auto;
-        }
-    </style>
+   
+    
 </head>
 
 <body>
@@ -33,21 +26,13 @@ and open the template in the editor.
         </ul>
     </nav>
 <!--    aquí va la zona de trabajo-->
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="tamanioDibujo" >
-                <img src="../Front/img/examen.svg">
-            </div>
-        </div>
-    </div>
-    
-</div>
-        
-    
+ <!--    Termina zona de trabajo-->
 </body>
 <script src="../../Boostrap/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script src="../../Boostrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../../datatable/js/jquery.dataTables.min.js" type="text/javascript"></script>
+
 
 <script src="../Front/js/Menu.js" type="text/javascript"></script>
+<script src="../Front/js/Materias.js" type="text/javascript"></script>
 </html>
