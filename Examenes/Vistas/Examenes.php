@@ -26,6 +26,92 @@ and open the template in the editor.
         </ul>
     </nav>
 <!--    aquí va la zona de trabajo-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" id="alertas">
+                               
+            </div>
+        </div>
+        <div class="row" id="divAdministrador" style="display:none;">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-1">
+                        <label >Usuario</label>
+                    </div>
+                    <div class="col-md-2">
+                        <input  type="text" value="" id="txtCapturaMatricula" class="form-control">
+                    </div>
+                    <div class="col-md-1">
+                        <input type="button"  value="Buscar" class="btn btn-success" onclick="buscarUsuarios();" />
+                    
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+   
+        <div class="row" id="divAlumno" style="display:none;">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-1">
+                        <label>Usuario</label>
+                    </div>
+                    <div class="col-md-1">
+                        <strong>  <label id="lblmatricula"></label></strong>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-1">
+                        <lable>
+                            Nombre
+                        </lable>
+                    </div>
+                    <div class="col-md-3">
+                        <strong> <lable id="lblNombre"></lable></strong>
+                    </div>     
+                </div> 
+                <br/>
+                <div class="row">
+                    <div class="col-md-1">
+                        <label>Materia</label>
+                    </div>
+                    <div class="col-md-3" >
+                        <select id="ddlMateria" class="form-control" onchange="catalogoCapitulos();">
+                            
+                        </select>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        <label>Capitulo</label>
+                    </div>
+                    <div class="col-md-3" >
+                        <select id="ddlCapitulo" class="form-control">
+                            
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <input type="button" value="Examen" id="btnExamen"  onclick="PintarExamen();" class="btn btn-warning" style="display:block"/>
+                    </div>
+                    <div class="col-md-1">
+                        <input type="button" value="Reabir" id="btniniciarbusqueda"  onclick="iniciarBusqueda();" class="btn btn-primary" style="display:none"/>
+                    </div>
+                </div>
+               
+            </div>                   
+        </div> 
+        <div class="row" id="divExamen">
+            <div class="col-md-12">
+                <div id="TrabajoExamen">
+                    
+                </div>
+                    
+            </div>          
+        </div>
+    </div>
+<input type="hidden" id="htipoUsuario" value="">
  <!--    Termina zona de trabajo-->
 </body>
 <script src="../../Boostrap/js/jquery-1.9.1.min.js" type="text/javascript"></script>
@@ -34,5 +120,5 @@ and open the template in the editor.
 
 
 <script src="../Front/js/Menu.js" type="text/javascript"></script>
-<script src="../Front/js/Materias.js" type="text/javascript"></script>
+<script src="../Front/js/Examenes.js" type="text/javascript"></script>
 </html>

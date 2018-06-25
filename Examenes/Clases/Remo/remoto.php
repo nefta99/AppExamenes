@@ -273,6 +273,47 @@ switch ($opcion)
         echo json_encode($res); 
         break;
 /************************************************************************************************************/
+    case "VerTipoUsuario":
+        $usuario = $_POST['usuario'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->valorartipoUsuario($usuario);
+        echo json_encode($res); 
+        break;
+ /************************************************************************************************************************************/
+     case "Nombreusuario":
+        $usuario = $_POST['usuario'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->verNombreUsuario($usuario);
+        echo json_encode($res); 
+        break;
+    /***********************************************************************************************************************************************/
+     case "busquedaUsuario":
+        $usuario = $_POST['usuario'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->busquededeUsuario($usuario);
+        echo json_encode($res); 
+        break;
+    /**********************************************************************************************************************************************************/
+     case "obtenerPreguntas":
+        $idmateria = $_POST['materia'];
+        $idcapitulo = $_POST['capitulo'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->buscarpregunta($idmateria,$idcapitulo);
+        echo json_encode($res); 
+        break;
+    /***************************************************************************************************************************/
+      case "obtenerRespuestas":
+        $idmpregunta = $_POST['idpregunta'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->buscarRespuestas($idmpregunta);
+        echo json_encode($res); 
+        break;
+    /**************************************************************************************************************************************/
 }
 
 
