@@ -37,7 +37,7 @@ and open the template in the editor.
     <div class="row">
         <div class="col-md-12">
             <div class="tamanioDibujo" >
-                <img src="../Front/img/examen.svg">
+                <img src="../Front/img/Examen.svg">
             </div>
         </div>
     </div>

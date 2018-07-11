@@ -341,6 +341,7 @@ and open the template in the editor.
                 </div>
                 
             </div>
+            <input type="hidden" value="" id="hdfTipoComponente">
         </div>
         
         <div class="row" id="divTablaPreguntas">

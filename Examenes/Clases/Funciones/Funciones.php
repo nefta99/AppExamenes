@@ -773,6 +773,35 @@ function catalogocapitulosSinMateria($materia){
         return $pantallas;
     }
     /****************************************************************************************************************************************************************/
+    function eje($usuario,$idcapitulo){
+        $sjons="";
+        $pantallas;
+        require_once '../ConServidor.php';
+        $base = new ConServidor();        
+        $datos = array();        
+        $sql = "CALL sp_sacarvaloresEjemplo (\'$usuario\',$idcapitulo);";
+        $sql = str_replace("\'","'",$sql);
+        $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+        /* comprobar la conexión */
+        if ($mysqli->connect_errno) {
+            printf("Falló la conexión: %s\n", $mysqli->connect_error);
+            exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+        }
+        if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+            $i=1;           
+            while($obj = $resultado->fetch_object()){                    
+                //$pantallas= array('TipoUsuario'=>$obj->TipoUsuario);
+                $pantallas[]= array('IdCapitulo'=>$obj->IdCapitulo,'IdPregunta'=>$obj->IdPregunta);
+               //$pantallas[]= array($obj->IdRespuesta,$obj->Pregunta,$obj->TipoComponente,$obj->Capitulo,$obj->Materia);                   
+                $i++;                    
+            }             
+            $resultado->close();
+        }   
+        $mysqli->close();  
+        return $pantallas;
+    }
+    
+    /****************************************************************************************************************************************************************************/
     function buscarpregunta($idmateria,$idcapitulo){
         $sjons="";
         $pantalla;
@@ -800,7 +829,10 @@ function catalogocapitulosSinMateria($materia){
         $mysqli->close();  
         return $pantallas;
     }
+    
     /****************************************************************************************************************************************************************************/
+    
+    
     function buscarRespuestas($idmpregunta){
         $sjons="";
         $pantalla;
@@ -819,7 +851,7 @@ function catalogocapitulosSinMateria($materia){
             $i=1;           
             while($obj = $resultado->fetch_object()){                    
                 //$pantallas= array('TipoUsuario'=>$obj->TipoUsuario);
-                $pantallas[]= array('IdRespuesta'=>$obj->IdRespuesta,'Respuesta'=>$obj->Respuesta);
+                $pantallas[]= array('IdRespuesta'=>$obj->IdRespuesta,'Respuesta'=>$obj->Respuesta,'IdComponente'=>$obj->IdComponente);
                //$pantallas[]= array($obj->IdRespuesta,$obj->Pregunta,$obj->TipoComponente,$obj->Capitulo,$obj->Materia);                   
                 $i++;                    
             }             
@@ -829,4 +861,218 @@ function catalogocapitulosSinMateria($materia){
         return $pantallas;
     }
     /**************************************************************************************************************************************************************************************/
+    function guardarHistorialPregunta($idcapitulo,$usuario,$idpregunta){
+        $sjons="";
+        $pantalla;
+        require_once '../ConServidor.php';
+        $base = new ConServidor();        
+        $datos = array();        
+        $sql = "CALL sp_guardarHistorialPregunta ($idcapitulo,\'$usuario\',$idpregunta);";
+        $sql = str_replace("\'","'",$sql);
+        $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+        /* comprobar la conexión */
+        if ($mysqli->connect_errno) {
+            printf("Falló la conexión: %s\n", $mysqli->connect_error);
+            exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+        }
+        if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+            $i=1;           
+            while($obj = $resultado->fetch_object()){                    
+                //$pantallas= array('TipoUsuario'=>$obj->TipoUsuario);
+                $sjons= array('Resultado'=>$obj->Resultado,'IdhisPregunta'=>$obj->IdhisPregunta);
+               //$pantallas[]= array($obj->IdRespuesta,$obj->Pregunta,$obj->TipoComponente,$obj->Capitulo,$obj->Materia);                   
+                $i++;                    
+            }             
+            $resultado->close();
+        }   
+        $mysqli->close();  
+        return $sjons;
+    }
+    /**************************************************************************************************************************************************************************************/
+    function guardarHistorialRespuestass($idhistorialPregunta,$idrespuesta){
+        $sjons="";
+        $pantalla;
+        require_once '../ConServidor.php';
+        $base = new ConServidor();        
+        $datos = array();        
+        $sql = "CALL sp_guardarHistorialRespuestass ($idhistorialPregunta,$idrespuesta);";
+        $sql = str_replace("\'","'",$sql);
+        $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+        /* comprobar la conexión */
+        if ($mysqli->connect_errno) {
+            printf("Falló la conexión: %s\n", $mysqli->connect_error);
+            exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+        }
+        if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+            $i=1;           
+            while($obj = $resultado->fetch_object()){                    
+                //$pantallas= array('TipoUsuario'=>$obj->TipoUsuario);
+                $sjons= array('Resultado'=>$obj->Resultado);
+               //$pantallas[]= array($obj->IdRespuesta,$obj->Pregunta,$obj->TipoComponente,$obj->Capitulo,$obj->Materia);                   
+                $i++;                    
+            }             
+            $resultado->close();
+        }   
+        $mysqli->close();  
+        return $sjons;
+    }
+    /**************************************************************************************************************************************************************************************************/
+    function obterresrespuestasss($usuario,$idpregunta){
+        $resultadoTotal;
+        $pantalla;
+        $suma =0;
+        $anterior=0;
+        
+        $multiplicacion =1;
+        $funciones = new Funciones();
+        $idpre = explode(",", $idpregunta);
+        for($a=0;$a<count($idpre);$a++){
+            //tomamos las respuestas del administrador
+            $resAdmin = $funciones->respuestaAdministradorSistemas($idpre[$a]);
+            //Tomamos la respuestas del usuario guardas.
+            $resUsuario =$funciones->respuestaUsuario($usuario,$idpre[$a]);
+            
+            $a;
+            $b;
+            $balor;
+            $suma=0;            
+            switch ($resAdmin[0]['IdComponente']){
+                case "1"://Componente select
+                     $tamanioArrUsuario= count($resUsuario);
+                     $suma=0;
+                     for($l=0;$l<$tamanioArrUsuario ; $l++){
+                         $balor= floatval($resUsuario[$l]['Valor']);
+                         if($balor != 0.0 or $balor !=0){
+                             $suma += $balor;
+                         }
+                                                  
+                     }
+                     $pantallas[]= array('IdPregunta'=>$idpre[$a],'Suma'=>$suma);                         
+                     break;
+                case "2"://Componente radio
+                     $tamanioArrUsuario= count($resUsuario);
+                     $suma=0;
+                     for($l=0;$l<$tamanioArrUsuario ; $l++){
+                         $balor= floatval($resUsuario[$l]['Valor']);
+                         if($balor != 0.0 or $balor !=0){
+                             $suma += $balor;
+                         }
+                                                   
+                     }
+                     $pantallas[]= array('IdPregunta'=>$idpre[$a],'Suma'=>$suma);                         
+                     break;
+                case "3": //componente checkbox
+                     $tamanioArrUsuario= count($resUsuario);
+                     $suma=0;
+                     $mul=1;
+                     for($l=0;$l<$tamanioArrUsuario ; $l++){
+                        $balor= floatval($resUsuario[$l]['Valor']);
+                        if($balor != 0.0 or $balor !=0){
+                             $suma += ($balor * $mul);                             
+                        }
+                        else{
+                             $suma=0;
+                             $mul=0;
+                        }                             
+                     }
+                     $pantallas[]= array('IdPregunta'=>$idpre[$a],'Suma'=>$suma);                         
+                     break;
+            }
+                        
+        }
+        
+        $sumaCompleta=0;
+        $resultado=0;
+        for($k=0;$k<count($pantallas);$k++){
+            $sumaCompleta += $pantallas[$k]['Suma'];
+        }
+        $resultado = $sumaCompleta / count($pantallas);
+        $resultadoTotal = array('Resultado'=>$resultado); 
+        return $resultadoTotal;
+    }
+    /**************************************************************************************************************************************************************************************************/
+    function respuestaUsuario($usuario,$idpregunta){
+        $sjons="";
+        $pantalla;
+        require_once '../ConServidor.php';
+        $base = new ConServidor();        
+        $datos = array();        
+        $sql = "CALL sp_resUsuario (\'$usuario\',$idpregunta);";
+        $sql = str_replace("\'","'",$sql);
+        $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+        /* comprobar la conexión */
+        if ($mysqli->connect_errno) {
+            printf("Falló la conexión: %s\n", $mysqli->connect_error);
+            exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+        }
+        if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+            $i=1;           
+            while($obj = $resultado->fetch_object()){                    
+                //$pantallas= array('Matricula'=>$obj->Matricula,'IdPregunta'=>$obj->IdPregunta,'IdRespuesta'=>$obj->IdRespuesta,'Valor'=>$obj->Valor);
+                //$sjons= array('Resultado'=>$obj->Resultado);
+               $pantallas[]= array('Matricula'=>$obj->Matricula,'IdPregunta'=>$obj->IdPregunta,'IdRespuesta'=>$obj->IdRespuesta,'Valor'=>$obj->Valor,'IdComponente'=>$obj->IdComponente);
+                $i++;                    
+            }             
+            $resultado->close();
+        }   
+        $mysqli->close();  
+        return $pantallas;
+    }
+    /**************************************************************************************************************************************************************************************************/
+    function respuestaAdministradorSistemas($idpregunta){
+        $sjons="";
+        $pantalla;
+        require_once '../ConServidor.php';
+        $base = new ConServidor();        
+        $datos = array();        
+        $sql = "CALL sp_resAdminSistema ($idpregunta);";
+        $sql = str_replace("\'","'",$sql);
+        $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+        /* comprobar la conexión */
+        if ($mysqli->connect_errno) {
+            printf("Falló la conexión: %s\n", $mysqli->connect_error);
+            exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+        }
+        if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+            $i=1;           
+            while($obj = $resultado->fetch_object()){                    
+                $pantallas[]= array('IdPregunta'=>$obj->IdPregunta,'IdComponente'=>$obj->IdComponente,'IdRespuesta'=>$obj->IdRespuesta,'Valor'=>$obj->Valor);
+                //$sjons= array('Resultado'=>$obj->Resultado);
+               //$pantallas[]= array($obj->IdRespuesta,$obj->Pregunta,$obj->TipoComponente,$obj->Capitulo,$obj->Materia);                   
+                $i++;                    
+            }             
+            $resultado->close();
+        }   
+        $mysqli->close();  
+        return $pantallas;
+    }
+    /**************************************************************************************************************************************************************************************************/
+    function hayExamen($capitulo,$usuario){
+        $sjons="";
+        $pantalla;
+        require_once '../ConServidor.php';
+        $base = new ConServidor();        
+        $datos = array();        
+        $sql = "CALL sp_hayExamen ($capitulo,\'$usuario\');";
+        $sql = str_replace("\'","'",$sql);
+        $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+        /* comprobar la conexión */
+        if ($mysqli->connect_errno) {
+            printf("Falló la conexión: %s\n", $mysqli->connect_error);
+            exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+        }
+        if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+            $i=1;           
+            while($obj = $resultado->fetch_object()){                    
+                $pantallas= array('Resultado'=>$obj->Resultado);
+                //$sjons= array('Resultado'=>$obj->Resultado);
+               //$pantallas[]= array($obj->IdRespuesta,$obj->Pregunta,$obj->TipoComponente,$obj->Capitulo,$obj->Materia);                   
+                $i++;                    
+            }             
+            $resultado->close();
+        }   
+        $mysqli->close();  
+        return $pantallas;
+    }
+    /*******************************************************************************************************************************************************************************************************************/
 }

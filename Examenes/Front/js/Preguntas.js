@@ -208,7 +208,7 @@ function guardar(idmateria,idcapitulo,pregunta,idcomponente){
                     $("#txtpregunta").val('');  
                     $("#ddlmateria").val('-1');
                     $("#ddlcapitulo").val('-1');
-                    $("#ddlcomponente").val('-1');
+                    //$("#ddlcomponente").val('-1');
                     alertaExito("La pregunta se guardo exítosamente");
                 }
                 else
@@ -245,7 +245,7 @@ function guardarRespuestas(){
     var v4 = $("#txtvalor4").val();
     var r5 = $("#txtrespuesta5").val();
     var v5 = $("#txtvalor5").val();
-    
+    var componente = $("#ddlcomponente").val();
     if (r1!="")
     {
         if(v1!="")
@@ -267,11 +267,23 @@ function guardarRespuestas(){
                                         if(v5!="")
                                         {
                                             if(!hayPreguntasRepetidas(r1,r2,r3,r4,r5)){
-                                                if(rangosCorrectos(parseFloat(v1),parseFloat(v2),parseFloat(v3),parseFloat(v4),parseFloat(v5))==true){
-                                                    if(sumaCorrecta(parseFloat(v1),parseFloat(v2),parseFloat(v3),parseFloat(v4),parseFloat(v5))==true){
-                                                        voloresGuardar(r1,r2,r3,r4,r5,v1,v2,v3,v4,v5);
-                                                    }                                                
+                                                if(componente=="3") //Checkbox
+                                                {
+                                                    if(rangosCorrectos(parseFloat(v1),parseFloat(v2),parseFloat(v3),parseFloat(v4),parseFloat(v5))==true){
+                                                        if(sumaCorrecta(parseFloat(v1),parseFloat(v2),parseFloat(v3),parseFloat(v4),parseFloat(v5))==true){
+                                                            voloresGuardar(r1,r2,r3,r4,r5,v1,v2,v3,v4,v5);
+                                                        }                                                
+                                                    }
                                                 }
+                                                else
+                                                {
+                                                    if(verificacionSelectORadio(v1,v2,v3,v4,v5)==true){
+                                                        if(sumaCorrecta(parseFloat(v1),parseFloat(v2),parseFloat(v3),parseFloat(v4),parseFloat(v5))==true){
+                                                            voloresGuardar(r1,r2,r3,r4,r5,v1,v2,v3,v4,v5);
+                                                        }  
+                                                    }
+                                                }
+                                                
                                             }                                            
                                         }
                                         else
@@ -413,6 +425,47 @@ function voloresGuardar(r1,r2,r3,r4,r5,v1,v2,v3,v4,v5)
             alertaError(exception + xhr.statusText);
         }
     });
+}
+/************************************************************************************************************************************************************/
+function verificacionSelectORadio(v1,v2,v3,v4,v5){
+    var bandera =true;
+    var valores =[parseFloat(v1),parseFloat(v2),parseFloat(v3),parseFloat(v4),parseFloat(v5)];
+    var sumatoria=0.0;
+    for(var i =0; i<=valores.length-1; i++){
+        if(valores[i]!=1 && valores[i]!=0){
+            switch(i){
+                case 0:
+                    alertaError("El valor de la primera caja de texto no es valido para que sea valido tiene que ser 0.0 o 1.0");
+                      bandera =false;  
+                    i =20;
+                    break;
+                case 1:
+                    alertaError("El valor de la segunda caja de texto no es valido para que sea valido tiene que ser 0.0 o 1.0");
+                    bandera =false;
+                    i =20;
+                    break;
+                case 2:
+                    alertaError("El valor de la tercera caja de texto no es valido para que sea valido tiene que ser 0.0 o 1.0");
+                    bandera =false;
+                    i =20;
+                    break;
+                case 3:
+                    alertaError("El valor de la cuarta caja de texto no es valido para que sea valido tiene que ser 0.0 o 1.0");
+                    bandera =false;
+                    i =20;
+                    break;
+                case 4:
+                    alertaError("El valor de la qinta caja de texto no es valido para que sea valido tiene que ser 0.0 o 1.0");
+                    bandera =false;
+                    i =20;
+                    break;    
+            }
+        }
+    
+    }
+   
+    
+    return bandera;
 }
 /***********************************************************************************************************************************************/
 function sumaCorrecta(v1,v2,v3,v4,v5){
@@ -815,6 +868,7 @@ function verRespuestaBloque(idpregunta,b,c,d){
     $("#divEditarRespuesta").css({"display":"block"});
     $("#preguntaEditarTxt").val(idpregunta);
     tomarRespuestasValores(idpregunta);
+    $("#hdfTipoComponente").val(c);
     
 }
 /***********************************************************************************************************************************************************************************/
@@ -917,7 +971,7 @@ function validacionesEditar(){
     var id3=$("#hdfR3").val();
     var id4=$("#hdfR4").val();
     var id5=$("#hdfR5").val();
-    
+    var componente = $("hdfTipoComponente").val();
     if (r1!="")
     {
         if(v1!="")
@@ -939,11 +993,22 @@ function validacionesEditar(){
                                         if(v5!="")
                                         {
                                             if(!hayPreguntasRepetidas(r1,r2,r3,r4,r5)){
-                                                if(rangosCorrectos(parseFloat(v1),parseFloat(v2),parseFloat(v3),parseFloat(v4),parseFloat(v5))==true){
-                                                    if(sumaCorrecta(parseFloat(v1),parseFloat(v2),parseFloat(v3),parseFloat(v4),parseFloat(v5))==true){                                                   
-                                                        editarRespuestasGuar(r1,r2,r3,r4,r5,v1,v2,v3,v4,v5,id1,id2,id3,id4,id5);
-                                                    }                                                
+                                                if(componente=="Checkbox"){
+                                                    if(rangosCorrectos(parseFloat(v1),parseFloat(v2),parseFloat(v3),parseFloat(v4),parseFloat(v5))==true){
+                                                        if(sumaCorrecta(parseFloat(v1),parseFloat(v2),parseFloat(v3),parseFloat(v4),parseFloat(v5))==true){                                                   
+                                                            editarRespuestasGuar(r1,r2,r3,r4,r5,v1,v2,v3,v4,v5,id1,id2,id3,id4,id5);
+                                                        }                                                
+                                                    }
                                                 }
+                                                else
+                                                {
+                                                    if(verificacionSelectORadio(v1,v2,v3,v4,v5)==true){
+                                                        if(sumaCorrecta(parseFloat(v1),parseFloat(v2),parseFloat(v3),parseFloat(v4),parseFloat(v5))==true){                                                   
+                                                            editarRespuestasGuar(r1,r2,r3,r4,r5,v1,v2,v3,v4,v5,id1,id2,id3,id4,id5);
+                                                        }  
+                                                    }
+                                                }
+                                                
                                             }                                            
                                         }
                                         else

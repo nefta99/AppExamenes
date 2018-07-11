@@ -314,6 +314,57 @@ switch ($opcion)
         echo json_encode($res); 
         break;
     /**************************************************************************************************************************************/
+    case "guardarHistorialPregunta":
+        $idcapitulo = $_POST['idcapitulo'];
+        $usuario = $_POST['usuario'];
+        $idpregunta = $_POST['idpregunta'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->guardarHistorialPregunta($idcapitulo,$usuario,$idpregunta);
+        echo json_encode($res); 
+        break;
+    /*****************************************************************************************************************************************/
+    case "guardarHistorialRespuesta":
+        $idhistorialPregunta = $_POST['idhistorialPregunta'];
+        $idrespuesta = $_POST['idrespuesta'];
+        
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->guardarHistorialRespuestass($idhistorialPregunta,$idrespuesta);
+        echo json_encode($res); 
+        break;
+    /*****************************************************************************************************************************************/
+    case "obtenerresultadosporPregunta":
+        $usuario = $_POST['usuario'];
+        $idpregunta = $_POST['idpregunta'];
+        
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->obterresrespuestasss($usuario,$idpregunta);
+        echo json_encode($res); 
+        break;
+    /*****************************************************************************************************************************************/
+     
+    case "valoresEjemplo":
+        $usuario = $_POST['usuario'];
+        $idcapitulo = $_POST['idcapitulo'];
+        
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->eje($usuario,$idcapitulo);
+        echo json_encode($res); 
+        break;
+    /*****************************************************************************************************************************************/
+    case "concerSiYaEvaluo":
+        $capitulo = $_POST['capitulo'];
+        $usuario = $_POST['usuario'];
+        
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->hayExamen($capitulo,$usuario);
+        echo json_encode($res); 
+        break;
+    /*****************************************************************************************************************************************/
 }
 
 

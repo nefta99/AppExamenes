@@ -98,6 +98,9 @@ and open the template in the editor.
                     <div class="col-md-1">
                         <input type="button" value="Reabir" id="btniniciarbusqueda"  onclick="iniciarBusqueda();" class="btn btn-primary" style="display:none"/>
                     </div>
+<!--                    <div class="col-md-1">
+                        <input type="button" value="Calificar" id="btnejemplo"  onclick="cali();" class="btn btn-primary" style="display:block"/>
+                    </div>-->
                 </div>
                
             </div>                   
@@ -109,6 +112,9 @@ and open the template in the editor.
                 </div>
                     
             </div>          
+        </div>
+        <div id="formadorJson" style="display:none;">
+            
         </div>
     </div>
 <input type="hidden" id="htipoUsuario" value="">
