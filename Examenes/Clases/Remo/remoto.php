@@ -365,6 +365,18 @@ switch ($opcion)
         echo json_encode($res); 
         break;
     /*****************************************************************************************************************************************/
+    case "ayexamenpintar":
+        $idmateria = $_POST['materia'];
+        $idcapitulo = $_POST['capitulo'];
+        
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->conocerExamen($idmateria,$idcapitulo);
+        echo json_encode($res); 
+        break;
+    
+    /*****************************************************************************************************************************************/
+    
 }
 
 

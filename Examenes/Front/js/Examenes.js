@@ -170,6 +170,7 @@ function cargarMateria(){
 }
 /***************************************************************************************************************/
 function catalogoCapitulos(){
+    $("#ddlCapitulo").empty();
     var materia =$("#ddlMateria").val();
     var paramentros = {
         "opt": "cargarCapitulosCatalogo",
@@ -204,21 +205,26 @@ function catalogoCapitulos(){
 }
 /*******************************************************************************************************************************/
 function PintarExamen(){
-    cerrarAlerta();
-    
+    cerrarAlerta();    
     var materia =$("#ddlMateria").val();
     var capitulo =$("#ddlCapitulo").val();
     var usuario =$("#lblmatricula").html().trim();
     $("#TrabajoExamen").empty();
     if(materia!="X"){
         if(capitulo!="X"){
-            if(!fueCalificado(capitulo,usuario))
-            {
-                pintarPregunta(materia,capitulo);
+            if(hayExamenMostrar(materia,capitulo)){
+                if(!fueCalificado(capitulo,usuario)) {                
+                    pintarPregunta(materia,capitulo);
+                }
+                else
+                {
+                    alertaError("La usuario " + usuario + " con anterioridad ya realizo su examen");
+                }                
             }
             else
             {
-                alertaError("La usuario " + usuario + " con anterioridad ya realizo su examen");
+                alertaError("No hay examen configurado, intentelo mas tarde");
+                
             }
         }
         else
@@ -233,6 +239,32 @@ function PintarExamen(){
     
     
     
+}
+/********************************************************************************************************************************************************/
+function hayExamenMostrar(materia, capitulo){
+    var bandera=false;
+    var paramentros = {
+        "opt": "ayexamenpintar",
+        "materia":materia,
+        "capitulo":capitulo
+        };
+    $.ajax({
+        url: '../Clases/Remo/remoto.php',
+        type: 'POST',
+        cache: false,
+	async: false,
+        data: paramentros,
+        dataType: "json",
+        success: function (data) {  
+            if(data.Resultado=="Existe"){
+                bandera=true;
+            }
+        },
+        error: errorHandler = function (xhr, errorType, exception) {
+            console.log(exception + xhr.statusText);
+        }
+    });
+    return bandera;
 }
 /*******************************************************************************************************************************************/
 function fueCalificado(capitulo,usuario){

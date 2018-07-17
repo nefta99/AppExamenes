@@ -1,0 +1,12 @@
+.reprobado{
+    background: red;
+}
+.aprobado{
+    background: green;
+}
+.letraReporbado{
+    font-size: 250%;
+}
+.letraAprobado{
+     font-size: 100%;
+}

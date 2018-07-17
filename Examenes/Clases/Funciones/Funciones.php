@@ -1074,5 +1074,33 @@ function catalogocapitulosSinMateria($materia){
         $mysqli->close();  
         return $pantallas;
     }
+    /**************************************************************************************************************************************************************************************************/
+    function conocerExamen($idmateria,$idcapitulo){
+        $sjons="";
+        $pantalla;
+        require_once '../ConServidor.php';
+        $base = new ConServidor();        
+        $datos = array();        
+        $sql = "CALL sp_hayExamenCapitulos ($idcapitulo,$idmateria);";
+        $sql = str_replace("\'","'",$sql);
+        $mysqli = new mysqli($base->getServidor(),$base->getUsuario(), $base->getPassword(), $base->getBasedeDatos());
+        /* comprobar la conexión */
+        if ($mysqli->connect_errno) {
+            printf("Falló la conexión: %s\n", $mysqli->connect_error);
+            exit(); /* Si se ha de recuperar una gran cantidad de datos se emplea MYSQLI_USE_RESULT */
+        }
+        if ($resultado = $mysqli->query($sql, MYSQLI_USE_RESULT)) {                
+            $i=1;           
+            while($obj = $resultado->fetch_object()){                    
+                $pantallas= array('Resultado'=>$obj->Resultado);
+                //$sjons= array('Resultado'=>$obj->Resultado);
+               //$pantallas[]= array($obj->IdRespuesta,$obj->Pregunta,$obj->TipoComponente,$obj->Capitulo,$obj->Materia);                   
+                $i++;                    
+            }             
+            $resultado->close();
+        }   
+        $mysqli->close();  
+        return $pantallas;
+    }
     /*******************************************************************************************************************************************************************************************************************/
 }
