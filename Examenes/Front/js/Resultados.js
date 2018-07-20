@@ -205,7 +205,7 @@ function cali(){
                 var calificacion =(parseFloat(res.Resultado) * 100);
                 if( calificacion> 50 ){
                     //pasate el examen
-                    html =' <div class="aprobado">Felicidades pasaste Tu Calificacion es: '+calificacion+' </div>';
+                    html =' <div class="aprobado">Felicidades pasaste Tu Calificacion es :<span class="letraAprobado"> '+calificacion+'</span> </div>';
                 }
                 else
                 {
@@ -308,4 +308,28 @@ function mostrarCalificacionExamen(usuario, idpregunta)
     });
     return obj;
 }
-/*************************************************************************************************************************************************/
+
+
+/******************************************************************************************************************************/
+function vernombre(usuario){
+    var paramentros = {
+        "opt":"Nombreusuario",
+        "usuario":usuario
+        };
+    $.ajax({
+        url: '../Clases/Remo/remoto.php',
+        type: 'POST',
+        cache: false,
+	async: false,
+        data: paramentros,
+        dataType: "json",
+        success: function (data) {   
+            var nombres = data[0].Nombre + ' '+ data[0].ApellidoPaterno + ' ' + data[0].ApellidoMaterno;
+            $("#lblNombre").text(nombres);
+        },
+        error: errorHandler = function (xhr, errorType, exception) {
+            console.log(exception + xhr.statusText);
+        }
+    });
+}
+/****************************************************************************************************************************/

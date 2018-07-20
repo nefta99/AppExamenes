@@ -376,6 +376,65 @@ switch ($opcion)
         break;
     
     /*****************************************************************************************************************************************/
+    case "catTipoUsuariosL":
+        
+        
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->catalogoTiposUsuarios();
+        echo json_encode($res); 
+        break;
+    
+    /*****************************************************************************************************************************************/
+    case "salvarDatosUsuario":
+        $nombre = $_POST['nombre'];
+        $paterno = $_POST['paterno'];
+        $materno = $_POST['materno'];
+        $tipousuario = $_POST['tipousuario'];
+        $usuario = $_POST['usuario'];
+        $pass = $_POST['pass'];
+        
+        
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->salvarUsuarios($nombre,$paterno,$materno,$tipousuario,$usuario,$pass);
+        echo json_encode($res); 
+        break;
+    
+    /*****************************************************************************************************************************************/
+    case "tblUsuarios":      
+        
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->tblUsuarios();
+        echo json_encode($res); 
+        break;
+    
+    /*****************************************************************************************************************************************/
+    case "borrarUsuario":      
+        $usuario = $_POST['usurio'];
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();
+        $res = $funciones->usuarioborrar($usuario);
+        echo json_encode($res); 
+        break;
+    
+    /*****************************************************************************************************************************************/
+    case "upusuario":      
+        $usuario = $_POST['usuario'];
+        $nombre = $_POST['nombre'];
+        $paterno = $_POST['paterno'];
+        $materno = $_POST['materno'];
+        $tipousuario = $_POST['tipousuario'];
+        $pass = $_POST['pass'];
+        
+        require_once '../Funciones/Funciones.php';  
+        $funciones = new Funciones();        
+        $res = $funciones->upusuario($usuario,$nombre,$paterno,$materno,$tipousuario,$pass);
+        echo json_encode($res); 
+        break;
+    
+    /*****************************************************************************************************************************************/
     
 }
 
