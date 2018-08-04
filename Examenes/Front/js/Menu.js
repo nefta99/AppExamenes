@@ -1,4 +1,4 @@
-
+//modificado por ramiro zepeda
 $(document).ready(function(){
     $("#ACerrar").click(function(){
         cerrarSession();
