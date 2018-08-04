@@ -1,3 +1,4 @@
+var globalPregunta="";
 function alertaError(texto)
 {
     var htn ='<div class="alert alert-danger" role="alert"  >';    
@@ -153,6 +154,8 @@ function catalogomaterias()
 }
 /*************************************************************************************************/
 function guardaPregunta(){
+    
+    $("#lblpreguntaMuestra").html($("#txtpregunta").val());
     var pregunta = $("#txtpregunta").val();
     var idmateria = $("#ddlmateria").val();
     var idcapitulo = $("#ddlcapitulo").val();

@@ -112,6 +112,11 @@ and open the template in the editor.
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-12">
+                        <label id="lblpreguntaMuestra"></label>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-4 text-center">
                         <label>Agregar Respuesta</label>
                     </div>
