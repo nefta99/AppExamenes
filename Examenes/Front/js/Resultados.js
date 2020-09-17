@@ -191,6 +191,9 @@ function cali(){
     var idcapitu =$("#ddlCapitulo").val();
     var idmateria =$("#ddlMateria").val();
     var obj = ajaxpreguntas(usuario,idcapitu);
+    //alert(JSON.stringify(obj));
+    
+    alert("materia "+ idmateria + " idcapitulo "+idcapitu);
     if(hayexamen(idmateria,idcapitu)){
         if (obj !=null)
         {

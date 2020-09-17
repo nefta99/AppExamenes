@@ -313,7 +313,7 @@ function pintarPregunta(materia,capitulo){
 	async: true,
         data: paramentros,
         dataType: "json",
-        success: function (data) {    
+        success: function (data) {             
             var html='';
             
             var cont =1;
@@ -340,10 +340,12 @@ function pintarPregunta(materia,capitulo){
                 html +='</div>';
                 html +='</div>';
             $("#TrabajoExamen").append(html);
+            //alert(JSON.stringify(listajoson));
             $("#formadorJson").append(JSON.stringify(listajoson));
             
         },
         error: errorHandler = function (xhr, errorType, exception) {
+            alert(exception + xhr.statusText);
             console.log(exception + xhr.statusText);
         }
     });
@@ -451,10 +453,10 @@ function cancelarExamen(){
 /****************************************************************************************************************************************/
 function evaluarExamen(){
     var j = $("#formadorJson").val();
-    var s = $("#formadorJson").html().trim();
+    var s = $("#formadorJson").html().trim();    
     var obj = JSON.parse(s);
     var transformacion=tomarvaloreHTML(obj);
-    
+    //alert(JSON.stringify(transformacion));
     crearEvaluacion(transformacion);
 }
 /**************************************************************************************************************************************/
@@ -575,6 +577,7 @@ function guardarHistorialRespuesta(idhistorialPregunta, idrespuesta){
             respuesta.Resultado=data.Resultado;
         },
         error: errorHandler = function (xhr, errorType, exception) {
+            alert(exception + xhr.statusText);
             console.log(exception + xhr.statusText);
         }
     });

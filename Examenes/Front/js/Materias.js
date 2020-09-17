@@ -151,7 +151,7 @@ function llenarTablaMaterias()
         });    
 }
 /***********************************************************************************************************************/
-function cargarEditada(id,registro,materia){
+function cargarEditada(id,registro,materia){    
     $("#divactualizarMaterias").css({"display":"block"});    
     $("#txtActualizaMateria").val(materia);
     $("#hdfId").val(id);   

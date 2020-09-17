@@ -13,9 +13,9 @@
  */
 class ConServidor {
     //put your code here
-      private $servidor="nefmaker.com";
-      private $usuario='logerdod';
-      private $password='nef123loginFederation';
+      private $servidor="localhost:3306";
+      private $usuario='root';
+      private $password='';
       private $base_datos='Examene';
       
        

@@ -16,7 +16,7 @@ class ConServidor {
       private $servidor="localhost:3306";
       private $usuario='root';
       private $password='';
-      private $base_datos='examen';
+      private $base_datos='examene';
       
        
        /* 

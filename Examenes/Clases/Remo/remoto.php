@@ -6,6 +6,40 @@ $json;
 
 switch ($opcion)
 {
+/************************************************************************************************************************************************************/    
+    case "acceso":
+        //funcion para reconocer al usuario
+        try {
+            $usuario =$_POST['usu'];
+            $pass=$_POST['pass'];
+            require_once'../Funciones/Funciones.php';
+            $funciones = new Funciones();
+            $resul = $funciones->validarUsuario($usuario,$pass);
+            //Validamos los datos del usurio
+            if ($resul =="Valido"){            
+                session_start();
+                if (!isset($_SESSION['usuario'])) 
+                {
+                    $_SESSION['usuario'] = $usuario;
+                }             
+                $res = $funciones->tomarSubdominio();   
+                $urls="http://".$_SERVER['HTTP_HOST'].$res."Vistas/Default.php";          
+                $urls = "Location: ".$urls;
+            
+            }
+            else 
+            {
+                $res = $funciones->tomarSubdominio();   
+                $urls="http://".$_SERVER['HTTP_HOST'].$res."Vistas/ErrorLogin.php";          
+                $urls = "Location: ".$urls;
+            }
+            header($urls);
+        } catch (Exception $e) {
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+        }
+        
+        
+        break;
 /***********************************************************************************************************************************************************/
     case "Login":
         //funcion para reconocer al usuario
@@ -82,7 +116,8 @@ switch ($opcion)
             require_once'../Funciones/Funciones.php';
             $funciones = new Funciones();
             $res = $funciones->tomarSubdominio();   
-            $urls="http://".$_SERVER['HTTP_HOST'].$res."Vistas/Login.php";          
+            //$urls="http://".$_SERVER['HTTP_HOST'].$res."Login.php";          
+            $urls="http://".$_SERVER['HTTP_HOST']."/AppExamenes/Login.php";          
             $valores = array('ur' =>$urls);
             session_start();
             unset($_SESSION["usuario"]);             

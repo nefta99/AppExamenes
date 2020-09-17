@@ -45,17 +45,19 @@ and open the template in the editor.
 //                      }, true);
 //                    
                     $.ajax({
-                        url:'../cocinas/Sessiones/ValidarSession.php',
+                        //url:'../cocinas/Sessiones/ValidarSession.php',
+                        url:'../AppExamenes/Examenes/Clases/Remo/remoto.php',
                         type:'post',
                         data:{
                             usu: userVar,
-                            pass: passVar
+                            pass: passVar,
+                            opt:'acceso'
                         },
                         datatype:'json',
                         success:function(datos){
                             //lo que va hacer
                             console.log(datos)
-                            document.location.href='../cocinas/Pantallas/Vistas/Default.php'
+                            document.location.href='../AppExamenes/Examenes/Vistas/Default.php'
                         }
                     });
 

@@ -13,7 +13,7 @@
  */
 class Ambientes {
     //put your code here
-    private $ambi="PROD"; /*  DEVL || PROD   */
+    private $ambi="DEVL"; /*  DEVL || PROD   */
     
     function getAmbiente()
        {
